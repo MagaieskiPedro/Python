@@ -29,4 +29,4 @@ https://api.marketstack.com/v2/eod
     & symbols = AAPL
 
 PokéAPI
-GET:  https://pokeapi.co/api/v2/pokemon/{id or name}/
+GET:  https://pokeapi.co/api/v2/pokemon/arcanine/
