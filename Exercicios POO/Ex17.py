@@ -1,5 +1,8 @@
 class Biblioteca:
+<<<<<<< HEAD
     #construtor
+=======
+>>>>>>> f1d958339cd7b6a657f41dee70a334f20c06fbaf
     def __init__(self,nome = "",autor = ""):
         self.nome = nome
         self.autor = autor
