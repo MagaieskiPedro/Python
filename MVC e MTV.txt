@@ -1,0 +1,4 @@
+Model view controller
+model se trata do modelo de dados que vem do banco de dados, view é a "visão" que o cliente recebe dos dados enviados pela api, e controller controla o acesso com 
+métodos da aplicação acessam a view (requisições http, o que será "puxado" etc)
+no MTV são divididos em Model Template e View, o modelo seguindo o mesmo proposito, o template sendo a view do MVC(exibindo dados ao cliente) e o View atua como o controle de aceso
