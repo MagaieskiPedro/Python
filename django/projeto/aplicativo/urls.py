@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('ola/',views.ola)
+    path('ola/',views.ordenar_postagens, name='postagens')
 ]
