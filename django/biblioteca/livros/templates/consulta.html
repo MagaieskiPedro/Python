@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Livro</title>
+</head>
+<body>
+    <a href="{% url  'criar' %}"></a>
+    <form method="post">
+        {% csrf_token %}
+        <label for="autor">procure um autor</label>
+        <input type="text" name="autor" id="autor">
+        <input type="submit" value="OK">
+    </form>
+    <ul>
+        {% for i in livros %}
+        <li>
+            O livro {{i.titulo}} tem o autor {{i.autor}} e foi lancado em {{i.anoPub}}
+            <a href="{% url 'alterar' i.pk%}">Editar um livro</a>
+            <a href="{% url 'apagar' i.pk%}">Apagar um livro</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
