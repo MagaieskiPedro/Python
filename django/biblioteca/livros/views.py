@@ -37,4 +37,3 @@ def delete(request,pk):
     return render(request, 'deletar.html', {'livro': livro})
 
 
-
