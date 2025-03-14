@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class pokemon(models.Model):
+class Pokemon(models.Model):
     nome = models.CharField(max_length=20)
     geracao = models.PositiveIntegerField()
     tipo = models.CharField(max_length=20)
