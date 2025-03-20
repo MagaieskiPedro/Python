@@ -50,3 +50,14 @@ def delete_pokemon(request, pk):
         return Response(status.HTTP_404_NOT_FOUND)
     pokemon.delete()
     return Response(status.HTTP_204_NO_CONTENT)
+@api_view(['PATCH'])
+def update_parcial_pokemon(request, pk):
+    try:
+        pokemon = Pokemon.objects.get(pk=pk)
+    except Pokemon.DoesNotExist:
+        return Response(status.HTTP_404_NOT_FOUND)
+    serializer = pokemonSerializer(pokemon, data = request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status.HTTP_202_ACCEPTED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
