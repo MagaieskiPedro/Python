@@ -5,17 +5,25 @@ from rest_framework.decorators import api_view, APIView
 from rest_framework import status
 
 
+
 from .models import Eventos
 from .serializer import EventoSerializer
+
 # Create your views here.
         
 @api_view(['GET'])
 def read_eventos(request):
     categoria = request.query_params.get('categoria')
     data = request.query_params.get('data_hora')
-    quantidade = request.query_params.get('quantidade') 
     page = request.query_params.get('page') 
-    eventos =  Eventos.objects.all() 
+    quantidade = request.query_params.get('quantidade') 
+    ordering = request.query_params.get('ordering') 
+    eventos =  Eventos.objects.all()
+    if ordering:
+        if ordering == "desce":
+            eventos =  Eventos.objects.all().order_by('data_hora').values()
+        else:
+            eventos =  Eventos.objects.all().order_by('data_hora').values().reverse()
     if quantidade and page:
         paginator = Paginator(eventos,quantidade)
         eventos = paginator.page(page)

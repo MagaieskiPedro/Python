@@ -22,9 +22,9 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title='Api de pokemon',
-        default_version='v0.5',
-        description='Crud de pokemons',
+        title='Api de eventos',
+        default_version='v0.3',
+        description='Crud com fltro de eventos',
         terms_of_service='aqui colocar link para termos de serviço',
         license = openapi.License(name="Licensa da openapi")
     ),
