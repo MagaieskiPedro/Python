@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Personagens</title>
+    <style>
+        /* Estilo geral para a página de listagem */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para a lista de personagens */
+        .personagens-lista {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .personagem-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .personagem-item:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .personagem-item .info {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+        .personagem-item .info p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+
+        .personagem-item .status {
+            font-weight: bold;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .status-ativo {
+            background-color: #4CAF50;
+        }
+
+        .status-inativo {
+            background-color: #f44336;
+        }
+
+        .personagem-item .animal {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .personagem-item .casa {
+            text-transform: capitalize;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .caption {
+            text-align: center;
+            font-style: italic;
+            color: #555;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de personagens de Harry Potter</h1>
+        <ul class="personagens-lista">
+            {% for personagem in personagens %}
+                <li class="personagem-item">
+                    <div class="info">
+                        <p>Nome: {{personagem.nome}}</p>
+                        <p class="animal">Animal de estimação: {{personagem.animal}}</p>
+                        <p class="casa">Casa: {{personagem.casa}}</p>
+                    </div>
+                    <div class="status {% if personagem.status %} status-ativo {% else %} status-inativo {% endif %}">
+                        Status do bruxo
+                    </div>
+                </li>
+                {% empty %}
+                <p>Bruxinho não encontrado</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
