@@ -105,11 +105,14 @@
                         <p>Nome: {{personagem.nome}}</p>
                         <p class="animal">Animal de estimação: {{personagem.animal}}</p>
                         <p class="casa">Casa: {{personagem.casa}}</p>
+                        <a href="{% url 'deletar_bruxo' personagem.id %}">Deletar</a>
+                        <a href="{% url 'atualizar_bruxo' personagem.id %}">Atualizar</a>
                     </div>
                     <div class="status {% if personagem.status %} status-ativo {% else %} status-inativo {% endif %}">
                         Status do bruxo
                     </div>
                 </li>
+
                 {% empty %}
                 <p>Bruxinho não encontrado</p>
             {% endfor %}

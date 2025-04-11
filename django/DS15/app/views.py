@@ -26,3 +26,9 @@ def atualizar_bruxo(request,pk):
     else:
         form = PersonagemForm()
     return render(request, "formulario.html",{'formulario':form})
+def deletar_bruxo(request,pk):
+    bruxo = get_object_or_404(PersonagemHarryPotter,pk=pk)
+    if request.method == 'POST':
+        bruxo.delete()
+        return redirect("listar_personagens")
+    return render(request, 'confirmar_delete.html', {'bruxo': bruxo})
