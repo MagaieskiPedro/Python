@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from rest_framework import serializers
 from rest_framework.generics import ListCreateAPIView
-from .models import Aniversariante
-from .serializers import AniversarianteSerializer
 from rest_framework.pagination import PageNumberPagination
 import re
+from datetime import datetime
+
+from .models import Aniversariante
+from .serializers import AniversarianteSerializer
+
+
 # Create your views here.
 class AniversariantePaginacao(PageNumberPagination):
     page_size = 5
@@ -24,8 +28,14 @@ class AniversarianteListCreateAPIView(ListCreateAPIView):
             queryset = queryset.filter(nome__icontains = nome)
         return queryset
     def perform_create(self, serializer):
-        regex = '^\d{3}.\d{3}.\d{3}-\d{2}$'
+        CPFregex = '^\d{3}.\d{3}.\d{3}-\d{2}$'
         cpf = serializer.validated_data['cpf']
-        if not re.match(regex,cpf):
+        data = serializer.validated_data['data']
+        idade = serializer.validated_data['idade']
+        data_agora = str(datetime.datetime.today()).split()[0]
+        # Aqui fazer validação comparando data atual com a data de nascimento e ver se é igual a idade
+        if data_agora - data != idade:
+            raise serializers.ValidationError("Idade não bate com a data de nascimento")
+        if not re.match(CPFregex,cpf):
             raise serializers.ValidationError("Cpf deve ser no formato adequado")
         serializer.save()
