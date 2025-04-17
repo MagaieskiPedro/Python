@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from rest_framework import serializers
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.pagination import PageNumberPagination
 import re
-from datetime import datetime
+from datetime import datetime, date
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Aniversariante
-from .serializers import AniversarianteSerializer
+from .serializers import AniversarianteSerializer, ObterTokenSerializer
 
 
 # Create your views here.
@@ -28,14 +29,24 @@ class AniversarianteListCreateAPIView(ListCreateAPIView):
             queryset = queryset.filter(nome__icontains = nome)
         return queryset
     def perform_create(self, serializer):
-        CPFregex = '^\d{3}.\d{3}.\d{3}-\d{2}$'
+        CPFregex = '^\\d{3}.\\d{3}.\\d{3}-\\d{2}$'
         cpf = serializer.validated_data['cpf']
         data = serializer.validated_data['data']
         idade = serializer.validated_data['idade']
-        data_agora = str(datetime.datetime.today()).split()[0]
+
         # Aqui fazer validação comparando data atual com a data de nascimento e ver se é igual a idade
-        if data_agora - data != idade:
-            raise serializers.ValidationError("Idade não bate com a data de nascimento")
+        # data_agora = date.today()
+        # if data_agora - data != idade:
+        #     raise serializers.ValidationError(f"Idade não bate com a data de nascimento")
+        
         if not re.match(CPFregex,cpf):
             raise serializers.ValidationError("Cpf deve ser no formato adequado")
         serializer.save()
+
+class AniversarianteRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Aniversariante.objects.all()
+    serializer_class = AniversarianteSerializer
+    lookup_field = 'pk'
+
+class LoginView(TokenObtainPairView):
+    serializer_class = ObterTokenSerializer
