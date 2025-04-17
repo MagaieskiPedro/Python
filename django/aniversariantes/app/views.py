@@ -7,7 +7,8 @@ from datetime import datetime, date
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Aniversariante
-from .serializers import AniversarianteSerializer, ObterTokenSerializer
+from .serializers import AniversarianteSerializer , LoginSerializer
+# ObterTokenSerializer
 
 
 # Create your views here.
@@ -49,4 +50,4 @@ class AniversarianteRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'pk'
 
 class LoginView(TokenObtainPairView):
-    serializer_class = ObterTokenSerializer
+    serializer_class = LoginSerializer
