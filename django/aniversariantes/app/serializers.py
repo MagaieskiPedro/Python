@@ -37,7 +37,6 @@ class LoginSerializer(TokenObtainPairSerializer):
         data['usuario'] = {
             'username': self.user.username,
             'email': self.user.email,
-            'foto': self.user.foto_perfil
         }
 
         return data
