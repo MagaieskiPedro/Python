@@ -2,21 +2,17 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-class Usuario(AbstractUser):
+class Professor(AbstractUser):
     CATEGORIA_ESCOLHA = [
         ('C','Comum'),
         ('G','Gestor')
     ]
     categoria = models.CharField(max_length=1,choices=CATEGORIA_ESCOLHA,default='C')
-    def __str__(self):
-        return self.username
-class Professor(models.Model):
-    ni = models.IntegerField()
+    ni = models.IntegerField(default=1)
     nome = models.CharField(max_length=15)
-    email = models.CharField(max_length=15)
-    telefone = models.IntegerField()
-    data_nascimento = models.DateField()
-    data_contratação = models.DateField()
+    telefone = models.IntegerField(default=1)
+    data_nascimento = models.DateField(default="2000-1-1")
+    data_contratação = models.DateField(default="2000-1-1")
     class Meta:
         verbose_name_plural = 'Professores'
 class Ambiente(models.Model):

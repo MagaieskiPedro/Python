@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin 
-from .models import Professor,Ambiente,Disciplina,Usuario
+from .models import Professor,Ambiente,Disciplina
 # Register your models here.
 class UsuarioAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
@@ -10,7 +10,6 @@ class UsuarioAdmin(UserAdmin):
         (None,{'fields': ('categoria',)}),
     )
 
-admin.site.register(Usuario, UsuarioAdmin)
-admin.site.register(Professor)
+admin.site.register(Professor,UsuarioAdmin)
 admin.site.register(Ambiente)
 admin.site.register(Disciplina)

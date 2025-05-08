@@ -1,15 +1,16 @@
-from django.urls import path
-from .views import ProfessorView,AmbienteView,DisciplinaView
+from django.urls import path,include
 from . import views
 from rest_framework.routers import DefaultRouter
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 
-router.register(r'professores/', ProfessorView, basename='professor')
-router.register(r'ambientes/', AmbienteView, basename='ambiente')
-router.register(r'disciplinas/', DisciplinaView, basename='disciplina')
+router.register(r'professores', views.ProfessorView)
+router.register(r'reservaAmbiente', views.AmbienteView)
+router.register(r'disciplina', views.DisciplinaView)
 
 
-urlpatterns = router.urls + [
-    path('login/', view=views.LoginView.as_view())
+urlpatterns = [
+    path('', include(router.urls)),
+    path('token/', view=views.LoginView.as_view()),
+    path('cadastro/', view=views.CadastroView.as_view())
 ]
