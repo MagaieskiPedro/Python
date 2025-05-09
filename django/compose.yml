@@ -1,0 +1,7 @@
+services:
+  web: 
+    build:
+      context: mercado
+      target: builder
+    ports: 
+      - '8080:8000'

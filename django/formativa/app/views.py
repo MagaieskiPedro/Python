@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import generics
-from rest_framework.generics import ListAPIView
+
 
 from .models import Professor,Ambiente,Disciplina
 from .serializer import ProfessorSerializer,AmbienteSerializer,DisciplinaSerializer,LoginSerializer,CadastroSerializer
@@ -29,3 +29,13 @@ class LoginView(TokenObtainPairView):
 class CadastroView(generics.CreateAPIView):
     queryset = Professor.objects.all()
     serializer_class = CadastroSerializer
+class reservasProfessores(generics.ListAPIView):
+    queryset = Ambiente.objects.all()
+    # Criar serilizador que filtra apenas ambientes do professor logado
+    #serializer_class = AmbienteSerializer
+    permission_classes = [isGestor]
+class disciplinaProfessores(generics.ListAPIView):
+    queryset = Disciplina.objects.all()
+    # Criar serilizador que filtra apenas disciplinas do professor logado
+    #serializer_class = DisciplinaSerializer
+    permission_classes = [isGestor]

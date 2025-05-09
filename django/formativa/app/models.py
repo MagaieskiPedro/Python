@@ -8,11 +8,11 @@ class Professor(AbstractUser):
         ('G','Gestor')
     ]
     categoria = models.CharField(max_length=1,choices=CATEGORIA_ESCOLHA,default='C')
-    ni = models.IntegerField(default=1)
+    ni = models.IntegerField()
     nome = models.CharField(max_length=15)
-    telefone = models.IntegerField(default=1)
-    data_nascimento = models.DateField(default="2000-1-1")
-    data_contratação = models.DateField(default="2000-1-1")
+    telefone = models.IntegerField()
+    data_nascimento = models.DateField()
+    data_contratação = models.DateField()
     class Meta:
         verbose_name_plural = 'Professores'
 class Ambiente(models.Model):

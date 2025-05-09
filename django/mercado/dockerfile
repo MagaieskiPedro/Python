@@ -1,0 +1,22 @@
+FROM python:3.12-alpine AS builder
+
+RUN pip install --upgrade pip 
+
+WORKDIR /mercado
+
+# Set environment variables 
+# Prevents Python from writing pyc files to disk
+ENV PYTHONDONTWRITEBYTECODE=1
+#Prevents Python from buffering stdout and stderr
+ENV PYTHONUNBUFFERED=1 
+
+
+COPY requirements.txt /mercado
+
+RUN pip install -r requirements.txt
+
+COPY . /mercado
+
+
+EXPOSE 8000
+CMD ["python","manage.py","runserver","0.0.0.0:8000"]

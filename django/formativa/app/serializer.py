@@ -19,7 +19,7 @@ class LoginSerializer(TokenObtainPairSerializer):
     def validate(self,attrs):
         data = super().validate(attrs)
         data['professor'] = {
-            'username': self.user.nome,
+            'username': self.user.username,
             'categoria': self.user.categoria
         }
         return data
@@ -29,21 +29,32 @@ class CadastroSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Professor
-        fields = ('username','password','password2','categoria')
+        fields = ('ni','nome','telefone','data_nascimento','data_contratação','password','password2','categoria')
     
     def validate(self, attrs):
+        data = super().validate(attrs)
         if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError(
                 {"password":"Campos senha não bateram"}
             )
         return attrs
     def create(self, validated_data):
+        
+        validated_data['username'] = validated_data['nome']
+        
         user = Professor.objects.create(
-            username=validated_data['username'],
+            ni= validated_data['ni'],
+            username=validated_data['nome'],
+            nome=validated_data['nome'],
+            telefone=validated_data['telefone'],
+            data_nascimento=validated_data['data_nascimento'],
+            data_contratação=validated_data['data_contratação'],
             categoria=validated_data['categoria'],
         )
         user.set_password(validated_data['password'])
         user.save()
 
         return user
+
+
 
