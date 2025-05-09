@@ -56,5 +56,15 @@ class CadastroSerializer(serializers.ModelSerializer):
 
         return user
 
+class reservasProfessorSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Ambiente
+        fields = "__all__"
+    
+    def validate(self,attrs):
+       # comparar chave estrangeira do modelo Ambiente com chave primaria do professor logado
+       if attrs['professor'] == "aqui fica o professor":
+           return True
+       return False
 
