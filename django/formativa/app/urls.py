@@ -12,5 +12,5 @@ router.register(r'disciplina', views.DisciplinaView)
 urlpatterns = [
     path('', include(router.urls)),
     path('token/', view=views.LoginView.as_view()),
-    path('cadastro/', view=views.CadastroView.as_view())
+    path('cadastro/', view=views.CadastroView.as_view()),
 ]
