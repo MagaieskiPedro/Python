@@ -3,6 +3,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Professor,Ambiente,Disciplina
 
 class ProfessorSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Professor
         fields = '__all__'

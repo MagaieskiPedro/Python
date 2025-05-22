@@ -15,6 +15,8 @@ class Professor(AbstractUser):
     data_contratação = models.DateField()
     class Meta:
         verbose_name_plural = 'Professores'
+    def __str__(self):
+        return self.nome
 class Ambiente(models.Model):
     PERIODO = [
         ('M','Manhã'),
@@ -28,6 +30,9 @@ class Ambiente(models.Model):
     
     professor = models.ForeignKey(Professor,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.sala
+
 class Disciplina(models.Model):
     nome = models.CharField(max_length=15)
     curso = models.CharField(max_length=15)
@@ -35,6 +40,9 @@ class Disciplina(models.Model):
     descrição = models.CharField(max_length=30)
     professor = models.ForeignKey(Professor,on_delete=models.CASCADE)
     ambiente = models.ForeignKey(Ambiente,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nome
 
 
     
